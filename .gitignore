@@ -4,6 +4,8 @@ node_modules
 stats.json
 log
 logs
+server/node_modules
+server/build
 
 # Cruft
 .DS_Store

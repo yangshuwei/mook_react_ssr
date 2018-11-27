@@ -1,9 +1,15 @@
-import {createStore,applyMiddleware} from 'redux';
+import {createStore,applyMiddleware,combineReducers} from 'redux';
 import thunk from 'redux-thunk';
-const reducer = (state={name:'dell'},action)=>{
-    return state;
+import  {reducer as homeReducer} from '../continers/Home/store/index';
+import clientAxios from '../client/request';
+import serverAxion from '../server/request';
+const reducer = combineReducers({
+    home:homeReducer
+})
+export const getStore = () => {
+    return createStore(reducer,applyMiddleware(thunk.withExtraArgument(serverAxion)))
 }
-const getStore = () => {
-    return createStore(reducer,applyMiddleware(thunk))
+export const getClientStore = () => {
+    const defaultState = window.context.state
+    return createStore(reducer,defaultState,applyMiddleware(thunk.withExtraArgument(clientAxios)))
 }
-export default getStore;
