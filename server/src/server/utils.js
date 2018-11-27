@@ -1,10 +1,10 @@
 import { renderToString } from 'react-dom/server';
 import { StaticRouter, Route, matchPath } from 'react-router-dom';
-
+import { renderRoutes } from 'react-router-config';
 import React from 'react';
 
 import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 export const render = (store, routes, req) => {
@@ -13,9 +13,10 @@ export const render = (store, routes, req) => {
         <Provider store={store}>
             <StaticRouter location={req.path} context={{}}>
                 <div>
-                    {routes.map(route => (
+                    {/* {routes.map(route => (
                         <Route {...route} />
-                    ))}
+                    ))} */}
+                    {renderRoutes(routes)}
                 </div>
             </StaticRouter>
         </Provider>
