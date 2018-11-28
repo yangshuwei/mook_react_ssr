@@ -8,15 +8,14 @@ import routes from '../Routes';
 import { getStore } from '../store'
 const app = express();
 app.use(express.static('public'));
-app.use('/revision', proxy('https://m.ehaier.com', {
+app.use('/api', proxy('http://47.95.113.63', {
     proxyReqPathResolver: function (req) {
-        console.log(req.url)
-        return '/sg/cms/revision' + req.url;
+        return '/ssr/api' + req.url;
 
     }
 }));
 app.get('*', function (req, res) {
-    const store = getStore();
+    const store = getStore(req);
     const matchedRoutes = matchRoutes(routes, req.path);
     const promises = [];
     matchedRoutes.forEach(item => {
@@ -25,7 +24,14 @@ app.get('*', function (req, res) {
         }
     })
     Promise.all(promises).then(() => {
-        res.send(render(store, routes, req))
+        const context = {};
+        const html = render(store, routes, req ,context);
+        if(context.NOT_FOUND){
+            res.status(404);
+            res.send(html)
+        }else{
+            res.send(html)
+        }
     })
 })
 app.listen(3000)

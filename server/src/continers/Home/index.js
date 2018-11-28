@@ -5,7 +5,7 @@ import {getHomeList} from './store/actions'
 class Home extends Component{
     getList(){
         const { list } = this.props;
-        return list.map(item=> <div key={item.id}>{item.labelName}</div>)
+        return list.map(item=> <div key={item.id}>{item.title}</div>)
     }
     render(){
         return (
