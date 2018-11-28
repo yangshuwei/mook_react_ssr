@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-class NotFound extends Component{
-  componentWillMount(){
-    const {staticContext} = this.props;
-    staticContext && (staticContext.NOT_FOUND=true)
+class NotFound extends Component {
+  componentWillMount() {
+    const { staticContext } = this.props;
+    staticContext && (staticContext.NOT_FOUND = true);
   }
-  render(){
+  render() {
     return <div>404, sorry, page is not found!!!</div>
   }
 }
