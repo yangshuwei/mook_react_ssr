@@ -2,11 +2,13 @@ import React, { Fragment, Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { actions } from './store/';
+import withStyle from '../../withStyle';
+import styles from './style.css'
 class Header extends Component {
   render() {
     const { login, handleLogin ,handleLogout } = this.props;
     return (
-      <div>
+      <div className={styles.test}>
         <Link to="/">首页</Link><br />
         {
           login ? <Fragment>
@@ -29,5 +31,5 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(actions.logout())
   }
 })
-export default connect(mapState, mapDispatchToProps)(Header);
+export default connect(mapState, mapDispatchToProps)(withStyle( Header , styles) );
 

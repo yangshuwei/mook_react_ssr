@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getTranslationList } from './store/actions';
 import { Redirect } from 'react-router-dom';
+import withStyle from '../../withStyle';
 class Translation extends Component {
+    static loadData (store)  {
+        return store.dispatch(getTranslationList())
+    }
     getList() {
         const { list } = this.props;
         return list.map(item => <div key={item.id}>{item.title}</div>)
@@ -22,9 +26,7 @@ class Translation extends Component {
         }
     }
 }
-Translation.loadData = (store) => {
-    return store.dispatch(getTranslationList())
-}
+
 const mapStateToProps = state => ({
     list: state.translation.translationList,
     login: state.header.login
@@ -34,5 +36,10 @@ const mapDispatchToProps = dispatch => ({
         dispatch(getTranslationList())
     }
 })
+const ExportTranslation = connect(mapStateToProps, mapDispatchToProps)(Translation);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Translation);
+// ExportTranslation.loadData = (store) => {
+//     return store.dispatch(getTranslationList())
+// }
+
+export default ExportTranslation;
