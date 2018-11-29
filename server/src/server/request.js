@@ -1,6 +1,6 @@
 import axios from 'axios';
 const createInstance = (req) => axios.create({
-    baseURL:'http://47.95.113.63/ssr',
+    baseURL:'http://localhost:3500/ssr',
     headers:{
         cookie:req.get('cookie') || ''
     }

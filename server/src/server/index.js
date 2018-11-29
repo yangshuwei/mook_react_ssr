@@ -8,7 +8,7 @@ import routes from '../Routes';
 import { getStore } from '../store'
 const app = express();
 app.use(express.static('public'));
-app.use('/api', proxy('http://47.95.113.63', {
+app.use('/api', proxy('http://localhost:3500', {
     proxyReqPathResolver: function (req) {
         return '/ssr/api' + req.url;
 
